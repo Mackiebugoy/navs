@@ -1,0 +1,39 @@
+<?php
+require_once 'classes/ProductCatalog.php';
+
+$productCatalog = new ProductCatalog();
+$products = $productCatalog->getProducts();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>E-commerce Shop</title>
+</head>
+<body>
+<div class="container">
+    <h1 class="my-4">Products</h1>
+    <div class="row">
+        <?php foreach ($products as $product): ?>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img class="card-img-top" src="<?= $product->getImage(); ?>" alt="<?= $product->getName(); ?>">
+                    <div class="card-body">
+                        <h4 class="card-title"><?= $product->getName(); ?></h4>
+                        <p class="card-text"><?= $product->getDescription(); ?></p>
+                    </div>
+                    <div class="card-footer">
+                        <h5>$<?= number_format($product->getPrice(), 2); ?></h5>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
